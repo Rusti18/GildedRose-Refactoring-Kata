@@ -20,6 +20,12 @@ class GildedRoseTests: XCTestCase {
         XCTAssertEqual(app.itemsDescription, "Sulfuras, Hand of Ragnaros, 0, 0")
     }
     
+    func test_agedBrie() throws {
+        let app = makeSUT(itemName: "Aged Brie", itemSellIn: 0, itemQuality: 0)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Aged Brie, -1, 2")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(itemName: String, itemSellIn: Int, itemQuality: Int) -> GildedRose {
