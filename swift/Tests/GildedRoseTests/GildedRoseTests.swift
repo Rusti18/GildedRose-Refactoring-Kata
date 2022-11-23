@@ -14,6 +14,12 @@ class GildedRoseTests: XCTestCase {
         XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, -1, 0")
     }
     
+    func test_sulfuras() throws {
+        let app = makeSUT(itemName: "Sulfuras, Hand of Ragnaros", itemSellIn: 0, itemQuality: 0)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Sulfuras, Hand of Ragnaros, 0, 0")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(itemName: String, itemSellIn: Int, itemQuality: Int) -> GildedRose {
