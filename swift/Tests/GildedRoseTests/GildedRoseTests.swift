@@ -5,7 +5,7 @@ class GildedRoseTests: XCTestCase {
     func test_foo() throws {
         let app = makeSUT(itemName: "foo", itemSellIn: 0, itemQuality: 0)
         app.updateQuality()
-        XCTAssertEqual(app.items[0].name, "foo")
+        XCTAssertEqual(app.itemsDescription, "foo, -1, 0")
     }
     
     // MARK: - Helpers
@@ -14,4 +14,8 @@ class GildedRoseTests: XCTestCase {
         let item = Item(name: itemName, sellIn: itemSellIn, quality: itemQuality)
         return GildedRose(items: [item])
     }
+}
+
+private extension GildedRose {
+    var itemsDescription: String { items[0].description }
 }
