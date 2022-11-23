@@ -3,9 +3,15 @@ import XCTest
 
 class GildedRoseTests: XCTestCase {
     func test_foo() throws {
-        let items = [Item(name: "foo", sellIn: 0, quality: 0)]
-        let app = GildedRose(items: items)
+        let app = makeSUT(itemName: "foo", itemSellIn: 0, itemQuality: 0)
         app.updateQuality()
         XCTAssertEqual(app.items[0].name, "foo")
+    }
+    
+    // MARK: - Helpers
+    
+    private func makeSUT(itemName: String, itemSellIn: Int, itemQuality: Int) -> GildedRose {
+        let item = Item(name: itemName, sellIn: itemSellIn, quality: itemQuality)
+        return GildedRose(items: [item])
     }
 }
