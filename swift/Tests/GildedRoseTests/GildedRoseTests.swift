@@ -15,18 +15,12 @@ class GildedRoseTests: XCTestCase {
     }
     
     func test_fooWithQuality() throws {
-        let app = makeSUT(itemName: "foo", itemQuality: 100)
+        let app = makeSUT(itemName: "foo", itemQuality: 50)
         app.updateQuality()
-        XCTAssertEqual(app.itemsDescription, "foo, -1, 98")
+        XCTAssertEqual(app.itemsDescription, "foo, -1, 48")
     }
     
     func test_fooWithSellInAndQuality() throws {
-        let app = makeSUT(itemName: "foo", itemSellIn: 10, itemQuality: 100)
-        app.updateQuality()
-        XCTAssertEqual(app.itemsDescription, "foo, 9, 99")
-    }
-    
-    func test_fooWithSellInAndQuality50() throws {
         let app = makeSUT(itemName: "foo", itemSellIn: 10, itemQuality: 50)
         app.updateQuality()
         XCTAssertEqual(app.itemsDescription, "foo, 9, 49")
