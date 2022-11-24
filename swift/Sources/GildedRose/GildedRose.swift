@@ -1,13 +1,19 @@
 public class GildedRose {
     var items: [Item]
+    
+    // MARK: - Init
 
     public init(items: [Item]) {
         self.items = items
     }
+    
+    // MARK: - Public Functions
 
     public func updateQuality() {
         items.forEach { updateQuality(for: $0) }
     }
+    
+    // MARK: - Helpers
     
     private func updateQuality(for item: Item) {
         if item.name != "Aged Brie", item.name != "Backstage passes to a TAFKAL80ETC concert" {
