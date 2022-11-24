@@ -81,12 +81,6 @@ class GildedRoseTests: XCTestCase {
     }
     
     func test_sulfurasWithSellInAndQuality() throws {
-        let app = makeSUT(itemName: "Sulfuras, Hand of Ragnaros", itemSellIn: 10, itemQuality: 100)
-        app.updateQuality()
-        XCTAssertEqual(app.itemsDescription, "Sulfuras, Hand of Ragnaros, 10, 100")
-    }
-    
-    func test_sulfurasWithSellInAndQuality50() throws {
         let app = makeSUT(itemName: "Sulfuras, Hand of Ragnaros", itemSellIn: 10, itemQuality: 50)
         app.updateQuality()
         XCTAssertEqual(app.itemsDescription, "Sulfuras, Hand of Ragnaros, 10, 50")
