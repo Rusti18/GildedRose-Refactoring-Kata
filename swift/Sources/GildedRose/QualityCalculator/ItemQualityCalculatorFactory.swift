@@ -15,7 +15,12 @@ public enum ItemQualityCalculatorFactory {
         case "Aged Brie": qualityCalculator = AgedBrieItemQualityCalculator(item: item)
         case "Sulfuras, Hand of Ragnaros": qualityCalculator = SulfurasItemQualityCalculator(item: item)
         case "Backstage passes to a TAFKAL80ETC concert": qualityCalculator = BackstagePassesItemCalculator(item: item)
-        default: qualityCalculator = ItemQualityCalculator(item: item)
+        default:
+            if item.name.starts(with: "Conjured") {
+                qualityCalculator = ConjuredItemQualityCalculator(item: item)
+            } else {
+                qualityCalculator = ItemQualityCalculator(item: item)
+            }
         }
         
         return qualityCalculator

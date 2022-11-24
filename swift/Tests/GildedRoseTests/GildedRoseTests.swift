@@ -122,6 +122,30 @@ class GildedRoseTests: XCTestCase {
         XCTAssertEqual(app.itemsDescription, "Aged Brie, -1, 42")
     }
     
+    func test_conjuredManaCake() throws {
+        let app = makeSUT(itemName: "Conjured Mana Cake")
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Conjured Mana Cake, -1, 0")
+    }
+    
+    func test_conjuredManaCakeWithSellIn() throws {
+        let app = makeSUT(itemName: "Conjured Mana Cake", itemSellIn: 10)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Conjured Mana Cake, 9, 0")
+    }
+    
+    func test_conjuredManaCakeWithSellInAndQuality() throws {
+        let app = makeSUT(itemName: "Conjured Mana Cake", itemSellIn: 10, itemQuality: 50)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Conjured Mana Cake, 9, 48")
+    }
+    
+    func test_conjuredPotionWithSellInAndQuality() {
+        let app = makeSUT(itemName: "Conjured Potion", itemSellIn: 10, itemQuality: 50)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Conjured Potion, 9, 48")
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(itemName: String, itemSellIn: Int = 0, itemQuality: Int = 0) -> GildedRose {
