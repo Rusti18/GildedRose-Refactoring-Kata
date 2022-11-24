@@ -38,6 +38,48 @@ class GildedRoseTests: XCTestCase {
         XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, -1, 0")
     }
     
+    func test_backstagePassesWithSellIn() throws {
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 10)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 9, 2")
+    }
+    
+    func test_backstagePassesWithQuality() throws {
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemQuality: 100)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, -1, 0")
+    }
+    
+    func test_backstagePassesWithSellInAndQuality() throws {
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 10, itemQuality: 100)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 9, 100")
+    }
+    
+    func test_backstagePassesWithSellInAndQuality50() throws {
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 10, itemQuality: 50)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 9, 50")
+    }
+    
+    func test_backstagePassesWithSellIn20AndQuality40() throws {
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 20, itemQuality: 40)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 19, 41")
+    }
+    
+    func test_backstagePassesWithSellIn6AndQuality40() throws {
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 6, itemQuality: 40)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 5, 42")
+    }
+    
+    func test_backstagePassesWithSellIn5AndQuality40() throws {
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 5, itemQuality: 40)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 4, 43")
+    }
+    
     func test_sulfuras() throws {
         let app = makeSUT(itemName: "Sulfuras, Hand of Ragnaros")
         app.updateQuality()
