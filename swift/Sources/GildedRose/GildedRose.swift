@@ -1,10 +1,12 @@
 public class GildedRose {
     var items: [Item]
+    let qualityCalculatorFactory: (Item) -> ItemQualityCalculator
     
     // MARK: - Init
 
-    public init(items: [Item]) {
+    public init(items: [Item], qualityCalculatorFactory: @escaping (Item) -> ItemQualityCalculator = { ItemQualityCalculatorFactory.createItemQualityCalculator(item: $0) }) {
         self.items = items
+        self.qualityCalculatorFactory = qualityCalculatorFactory
     }
     
     // MARK: - Public Functions
@@ -16,15 +18,7 @@ public class GildedRose {
     // MARK: - Helpers
     
     private func updateQuality(for item: Item) {
-        let qualityCalculator: ItemQualityCalculator
-        
-        switch item.name {
-        case "Aged Brie": qualityCalculator = AgedBrieItemQualityCalculator(item: item)
-        case "Sulfuras, Hand of Ragnaros": qualityCalculator = SulfurasItemQualityCalculator(item: item)
-        case "Backstage passes to a TAFKAL80ETC concert": qualityCalculator = BackstagePassesItemCalculator(item: item)
-        default: qualityCalculator = ItemQualityCalculator(item: item)
-        }
-        
-        qualityCalculator.updateQuality()
+        let calculator = qualityCalculatorFactory(item)
+        calculator.updateQuality()
     }
 }
