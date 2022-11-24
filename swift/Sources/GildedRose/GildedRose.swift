@@ -16,51 +16,64 @@ public class GildedRose {
     // MARK: - Helpers
     
     private func updateQuality(for item: Item) {
-        if item.name != "Aged Brie", item.name != "Backstage passes to a TAFKAL80ETC concert" {
-            if item.quality > 0 {
-                if item.name != "Sulfuras, Hand of Ragnaros" {
-                    item.quality = item.quality - 1
-                }
-            }
-        } else {
+        switch item.name {
+        case "Aged Brie": updateQualityForAgedBrieItem(item: item)
+        case "Sulfuras, Hand of Ragnaros": updateQualityForSulfuras(item: item)
+        case "Backstage passes to a TAFKAL80ETC concert": updateQualityForBackstagePassItem(item: item)
+        default: updateQualityForOther(item: item)
+        }
+    }
+    
+    private func updateQualityForAgedBrieItem(item: Item) {
+        if item.quality < 50 {
+            item.quality = item.quality + 1
+        }
+        
+        item.sellIn = item.sellIn - 1
+        
+        if item.sellIn < 0 {
             if item.quality < 50 {
                 item.quality = item.quality + 1
-
-                if item.name == "Backstage passes to a TAFKAL80ETC concert" {
-                    if item.sellIn < 11 {
-                        if item.quality < 50 {
-                            item.quality = item.quality + 1
-                        }
-                    }
-
-                    if item.sellIn < 6 {
-                        if item.quality < 50 {
-                            item.quality = item.quality + 1
-                        }
-                    }
-                }
             }
         }
+    }
+    
+    private func updateQualityForBackstagePassItem(item: Item) {
+        if item.quality < 50 {
+            item.quality = item.quality + 1
 
-        if item.name != "Sulfuras, Hand of Ragnaros" {
-            item.sellIn = item.sellIn - 1
-        }
-
-        if item.sellIn < 0 {
-            if item.name != "Aged Brie" {
-                if item.name != "Backstage passes to a TAFKAL80ETC concert" {
-                    if item.quality > 0 {
-                        if item.name != "Sulfuras, Hand of Ragnaros" {
-                            item.quality = item.quality - 1
-                        }
-                    }
-                } else {
-                    item.quality = item.quality - item.quality
-                }
-            } else {
+            if item.sellIn < 11 {
                 if item.quality < 50 {
                     item.quality = item.quality + 1
                 }
+            }
+
+            if item.sellIn < 6 {
+                if item.quality < 50 {
+                    item.quality = item.quality + 1
+                }
+            }
+        }
+
+        item.sellIn = item.sellIn - 1
+
+        if item.sellIn < 0 {
+            item.quality = item.quality - item.quality
+        }
+    }
+    
+    private func updateQualityForSulfuras(item: Item) {}
+    
+    private func updateQualityForOther(item: Item) {
+        if item.quality > 0 {
+            item.quality = item.quality - 1
+        }
+
+        item.sellIn = item.sellIn - 1
+
+        if item.sellIn < 0 {
+            if item.quality > 0 {
+                item.quality = item.quality - 1
             }
         }
     }
