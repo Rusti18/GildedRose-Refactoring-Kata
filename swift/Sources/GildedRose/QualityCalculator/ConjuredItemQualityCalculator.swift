@@ -10,7 +10,7 @@ import Foundation
 public final class ConjuredItemQualityCalculator: ItemQualityCalculator {
     override public func decreaseQuality() {
         if item.quality > 0 {
-            item.quality = item.quality - 2
+            item.quality = max(item.quality - 2, 0)
         }
     }
 }
