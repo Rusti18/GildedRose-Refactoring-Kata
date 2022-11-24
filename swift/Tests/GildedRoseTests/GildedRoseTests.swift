@@ -105,12 +105,6 @@ class GildedRoseTests: XCTestCase {
     }
     
     func test_agedBrieWithSellInAndQuality() throws {
-        let app = makeSUT(itemName: "Aged Brie", itemSellIn: 10, itemQuality: 100)
-        app.updateQuality()
-        XCTAssertEqual(app.itemsDescription, "Aged Brie, 9, 100")
-    }
-    
-    func test_agedBrieWithSellInAndQuality50() throws {
         let app = makeSUT(itemName: "Aged Brie", itemSellIn: 10, itemQuality: 50)
         app.updateQuality()
         XCTAssertEqual(app.itemsDescription, "Aged Brie, 9, 50")
