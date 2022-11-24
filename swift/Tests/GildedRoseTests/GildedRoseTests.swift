@@ -8,6 +8,30 @@ class GildedRoseTests: XCTestCase {
         XCTAssertEqual(app.itemsDescription, "foo, -1, 0")
     }
     
+    func test_fooWithSellIn() throws {
+        let app = makeSUT(itemName: "foo", itemSellIn: 10)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "foo, 9, 0")
+    }
+    
+    func test_fooWithQuality() throws {
+        let app = makeSUT(itemName: "foo", itemQuality: 100)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "foo, -1, 98")
+    }
+    
+    func test_fooWithSellInAndQuality() throws {
+        let app = makeSUT(itemName: "foo", itemSellIn: 10, itemQuality: 100)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "foo, 9, 99")
+    }
+    
+    func test_fooWithSellInAndQuality50() throws {
+        let app = makeSUT(itemName: "foo", itemSellIn: 10, itemQuality: 50)
+        app.updateQuality()
+        XCTAssertEqual(app.itemsDescription, "foo, 9, 49")
+    }
+    
     func test_backstagePasses() throws {
         let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert")
         app.updateQuality()
