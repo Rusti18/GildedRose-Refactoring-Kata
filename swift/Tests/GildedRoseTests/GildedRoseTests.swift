@@ -39,18 +39,12 @@ class GildedRoseTests: XCTestCase {
     }
     
     func test_backstagePassesWithQuality() throws {
-        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemQuality: 100)
+        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemQuality: 50)
         app.updateQuality()
         XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, -1, 0")
     }
     
     func test_backstagePassesWithSellInAndQuality() throws {
-        let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 10, itemQuality: 100)
-        app.updateQuality()
-        XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 9, 100")
-    }
-    
-    func test_backstagePassesWithSellInAndQuality50() throws {
         let app = makeSUT(itemName: "Backstage passes to a TAFKAL80ETC concert", itemSellIn: 10, itemQuality: 50)
         app.updateQuality()
         XCTAssertEqual(app.itemsDescription, "Backstage passes to a TAFKAL80ETC concert, 9, 50")
